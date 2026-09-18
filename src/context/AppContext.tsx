@@ -378,7 +378,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         id: generatePlanId(),
         createdAt: new Date().toISOString(),
       };
-      const updated = [newPlan, ...plans];
+      const updated = [...plans, newPlan];
       setPlans(updated);
       storageRepo.savePlans(updated);
     },
@@ -427,7 +427,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         id: generateVsId(),
         createdAt: new Date().toISOString(),
       };
-      const updated = [newRecord, ...vehicleStatusRecords];
+      const updated = [...vehicleStatusRecords, newRecord];
       setVehicleStatusRecords(updated);
       storageRepo.saveVehicleStatusRecords(updated);
     },
@@ -460,7 +460,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     (rawText: string, mode: 'APPEND' | 'REPLACE') => {
       const current = mode === 'REPLACE' ? [] : plans;
       const { plans: parsedPlans, rawRowsCount } = parseDispatchSchedulePaste(rawText, current);
-      const combined = mode === 'REPLACE' ? parsedPlans : [...parsedPlans, ...plans];
+      const combined = mode === 'REPLACE' ? parsedPlans : [...plans, ...parsedPlans];
       setPlans(combined);
       storageRepo.savePlans(combined);
       return { plansCount: parsedPlans.length, rawRowsCount };
@@ -472,7 +472,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const pasteVehicleStatus = useCallback(
     (rawText: string, mode: 'APPEND' | 'REPLACE') => {
       const { records: parsedRecords, rawRowsCount } = parseVehicleStatusPaste(rawText);
-      const combined = mode === 'REPLACE' ? parsedRecords : [...parsedRecords, ...vehicleStatusRecords];
+      const combined = mode === 'REPLACE' ? parsedRecords : [...vehicleStatusRecords, ...parsedRecords];
       setVehicleStatusRecords(combined);
       storageRepo.saveVehicleStatusRecords(combined);
       return { recordsCount: parsedRecords.length, rawRowsCount };
