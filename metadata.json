@@ -1,0 +1,6 @@
+{
+  "name": "STO & Vehicle Management System",
+  "description": "Enterprise STO & Vehicle Management System with authoritative relationship engine, Live Dispatch Schedule, Vehicle Status Records, and Vehicle Status Bridge.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
